@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,28 +13,28 @@
         <div class="weather-app">
             <div class="search-box">
                 <input type="text" id="city-input" placeholder="Digite uma cidade...">
-                <button class="fas fa-search"><i class="fas fa-search"></i></button>
+                <button id="search-btn"><i class="fas fa-search"></i></button>
             </div>
 
             <div class="weather-info">
                 <div class="city-date">
-                    <h2 class="city-name">Rio de Janeiro</h2>
-                    <p class="current-date">Segunda, 15 Maio 2023</p>
+                    <h2 id="city-name">São Paulo</h2>
+                    <p id="current-date">Segunda, 15 Maio 2023</p>
                 </div>
 
                 <div class="weather-temp">
-                    <img src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather Icon" class="weather-icon">
-                    <p class="temperature">25ºC</p>
+                    <img id="weather-icon" src="https://openweathermap.org/img/wn/01d@2x.png" alt="Weather Icon">
+                    <p id="temperature">25°C</p>
                 </div>
 
                 <div class="weather-details">
                     <div class="detail">
                         <i class="fas fa-water"></i>
-                            <p>Umidade: <span class="humidity">60%</span></p>
+                        <p>Umidade: <span id="humidity">60%</span></p>
                     </div>
                     <div class="detail">
                         <i class="fas fa-wind"></i>
-                        <p>Vento: <span class="wind-speed">10 km/h</span></p>
+                        <p>Vento: <span id="wind-speed">10 km/h</span></p>
                     </div>
                 </div>
             </div>

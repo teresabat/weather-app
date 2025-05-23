@@ -1,64 +1,64 @@
-const searchBtn = document.getElementById('search-btn');
-const cityInput = document.getElementById('city-input');
-const cityName = document.getElementById('city-name');
-const currentDate = document.getElementById('current-date');
-const weatherIcon = document.getElementById('weather-icon');
-const temperature = document.getElementById('temperatura');
-const humidity = document.getElementById('humidity');
-const windSpeed = document.getElementById('wind-speed');
+const searchBtn = document.getElementById("search-btn");
+const cityInput = document.getElementById("city-input");
+const cityName = document.getElementById("city-name");
+const currentDate = document.getElementById("current-date");
+const weatherIcon = document.getElementById("weather-icon");
+const temperature = document.getElementById("temperature");
+const humidity = document.getElementById("humidity");
+const windSpeed = document.getElementById("wind-speed");
 
-// api
+// API Key - Substitua pela sua chave da OpenWeatherMap
 const API_KEY = "97c5e0f242d9bc920b0a3d6414934048";
 
-// func to formate the date
+// Função para formatar a data
 function formatDate(date) {
-    const option = { weekday: 'long', year:'numeric', month: 'long', day:'numeric' };
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     return date.toLocaleDateString('pt-BR', options);
 }
 
-// search weather data
+// Buscar dados do clima
 async function fetchWeather(city) {
     try {
         const response = await fetch(
-           `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=pt_br` 
+            `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric&lang=pt_br`
         );
-
-     if (!response.of) {
-        throw new Error ("Cidade não encontrada!");
-    }
+        
+        if (!response.ok) {
+            throw new Error("Cidade não encontrada!");
+        }
 
         const data = await response.json();
-            displayWeather(data);
-                 } catch (error) {
-            alert(error.message);
-     }
-}   
+        displayWeather(data);
+    } catch (error) {
+        alert(error.message);
+    }
+}
 
-//show weather datas
+// Exibir os dados do clima
 function displayWeather(data) {
     cityName.textContent = data.name;
-    currentDate.textContent = formateDate(new Date());
-    temperature.textcontet = `${Math.round(data.main.temp)}ºC`;
+    currentDate.textContent = formatDate(new Date());
+    temperature.textContent = `${Math.round(data.main.temp)}°C`;
     humidity.textContent = `${data.main.humidity}%`;
     windSpeed.textContent = `${Math.round(data.wind.speed * 3.6)} km/h`;
-
-    //update weather icon
+    
+    // Atualizar ícone do clima
     const iconCode = data.weather[0].icon;
     weatherIcon.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 }
 
-//event of click in search button
-searchBtn.addEventListener('click', () => {
+// Evento de clique no botão de busca
+searchBtn.addEventListener("click", () => {
     const city = cityInput.value.trim();
-    if (city){
+    if (city) {
         fetchWeather(city);
     } else {
-        alert ("Digite uma cidade!");
+        alert("Digite uma cidade!");
     }
 });
 
-// search weater when press enter
-cityInput.addEventListener('keypress', (e) => {
+// Buscar clima ao pressionar Enter
+cityInput.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
         const city = cityInput.value.trim();
         if (city) {
@@ -67,7 +67,7 @@ cityInput.addEventListener('keypress', (e) => {
     }
 });
 
-//get weather for a default city on page load
-window.addEventListener('load', () => {
-    fetchWeather("Rio de Janeiro");
+// Buscar clima de uma cidade padrão ao carregar a página
+window.addEventListener("load", () => {
+    fetchWeather("São Paulo");
 });
